@@ -4,6 +4,9 @@ import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const { createRequire } = await import('node:module');
+const require = createRequire(import.meta.url);
+const root = path.dirname(require.resolve('ffmpeg-static/package.json'));
 const targetDir = path.join(__dirname, '..', 'resources', 'ffmpeg');
 const target = path.join(targetDir, 'ffmpeg.exe');
 const baseUrl = process.env.FFMPEG_BINARIES_URL || 'https://github.com/eugeneware/ffmpeg-static/releases/download';
@@ -30,6 +33,8 @@ try {
   fs.rmSync(gzipPath, { force: true });
   fs.chmodSync(target, 0o755);
   fs.copyFileSync(path.join(__dirname, 'bundle-readme.md'), path.join(targetDir, 'README.md'));
+  const lic = path.join(root, 'LICENSE');
+  if (fs.existsSync(lic)) fs.copyFileSync(lic, path.join(targetDir, 'ffmpeg-win.LICENSE'));
   console.log(`Windows ffmpeg ready: ${target}`);
 } catch (error) {
   console.error(error.message);
