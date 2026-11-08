@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: macos-14
+          - os: macos-15
             script: dist:mac
             asset_glob: 'release/*.dmg'
             asset_glob_zip: 'release/*mac.zip'
@@ -52,6 +52,8 @@ jobs:
         env:
           ELECTRON_MIRROR: https://npmmirror.com/mirrors/electron/
           ELECTRON_BUILDER_BINARIES_MIRROR: https://npmmirror.com/mirrors/electron-builder-binaries/
+          FFMPEG_BINARIES_URL: https://npmmirror.com/mirrors/ffmpeg-static/
+          FFMPEG_NO_PROXY: '1'
       - name: Generate checksums
         working-directory: .
         shell: pwsh
