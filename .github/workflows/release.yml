@@ -48,12 +48,22 @@ jobs:
           node --check public/app.js
       - name: Build
         working-directory: .
-        run: npm run ${{ matrix.script }}
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run ${{ matrix.script }} 2>&1 | tee build-output.log
         env:
           ELECTRON_MIRROR: https://npmmirror.com/mirrors/electron/
           ELECTRON_BUILDER_BINARIES_MIRROR: https://npmmirror.com/mirrors/electron-builder-binaries/
           FFMPEG_BINARIES_URL: https://npmmirror.com/mirrors/ffmpeg-static/
           FFMPEG_NO_PROXY: '1'
+      - name: Print build tail on failure
+        if: failure()
+        working-directory: .
+        shell: bash
+        run: |
+          tail -n 200 build-output.log || true
+
       - name: Generate checksums
         working-directory: .
         shell: pwsh
