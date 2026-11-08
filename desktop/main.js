@@ -152,7 +152,6 @@ function setApplicationMenu() {
               message: 'DJI Media Manager',
               detail: [
                 `版本：${app.getVersion()}`,
-                '作者：JackHe',
                 '微信号：JackHe6',
                 '本项目基于 MIT 许可；内置 ffmpeg 遵守其自身开源许可。'
               ].join('\n')

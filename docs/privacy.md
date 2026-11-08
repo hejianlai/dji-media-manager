@@ -1,6 +1,6 @@
 # 隐私说明
 
-DJI 素材管理器不需要账号，不包含默认遥测。
+DJI Media Manager 不需要账号，不包含默认遥测。
 
 ## 不收集
 
@@ -14,8 +14,8 @@ DJI 素材管理器不需要账号，不包含默认遥测。
 
 应用会在系统用户数据目录保存缩略图缓存：
 
-- macOS：`~/Library/Application Support/DJI 素材管理器/cache`
-- Windows：`%APPDATA%/DJI 素材管理器/cache`
+- macOS：`~/Library/Application Support/DJI Media Manager/cache`
+- Windows：`%APPDATA%/DJI Media Manager/cache`
 
 用户可以删除该缓存目录，应用会在需要时重建。
 

@@ -29,8 +29,8 @@ npm run dist:win
 产物：
 
 ```text
-release/DJI 素材管理器-Setup-1.0.0-x64.exe
-release/DJI 素材管理器-Portable-1.0.0-x64.exe
+release/dji-media-manager-Setup-1.0.0-x64.exe
+release/dji-media-manager-Portable-1.0.0-x64.exe
 ```
 
 说明：

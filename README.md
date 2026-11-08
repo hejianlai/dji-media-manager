@@ -1,4 +1,4 @@
-# DJI 素材管理器
+# DJI Media Manager
 
 浏览 DJI Action 4 等相机存储卡素材，安全批量清理低价值文件。
 
@@ -34,7 +34,7 @@
 3. 如果 macOS 仍提示，可在终端执行：
 
 ```bash
-xattr -dr com.apple.quarantine "/Applications/DJI 素材管理器.app"
+xattr -dr com.apple.quarantine "/Applications/DJI Media Manager.app"
 ```
 
 ### Windows
@@ -142,9 +142,8 @@ npm run desktop
 MIT。第三方组件许可见 [`NOTICE.md`](NOTICE.md)。
 
 
-## 作者
+## 联系
 
-作者：**JackHe**  
 微信号：**JackHe6**
 
-如果工具有问题或需要交流，欢迎通过 GitHub Issue 反馈；合作或商务事宜也可通过微信号联系。
+使用问题请优先提交 GitHub Issue；合作或商务事宜可通过微信号联系。
