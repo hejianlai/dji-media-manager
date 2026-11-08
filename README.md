@@ -1,4 +1,4 @@
-# DJI Media Manager
+# DJI Media Manager【DJI 素材管理】
 
 浏览 DJI Action 4 等相机存储卡素材，安全批量清理低价值文件。
 
