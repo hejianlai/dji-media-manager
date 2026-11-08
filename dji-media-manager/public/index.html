@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DJI 素材管理</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <h1>DJI 素材管理</h1>
+      <span id="status" class="status">正在读取存储卡…</span>
+    </div>
+    <div class="root-picker">
+      <label for="rootInput">素材目录</label>
+      <div class="root-controls">
+        <input id="rootInput" type="text" placeholder="/Volumes/.../DCIM/DJI_001" autocomplete="off" spellcheck="false">
+        <button id="loadRoot" class="ghost">加载</button>
+        <select id="rootSelect" title="自动发现的媒体目录"><option value="">自动发现…</option></select>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button id="selectVisible" class="ghost">全选当前筛选</button>
+      <button id="clearSelection" class="ghost">清空选择</button>
+      <button id="selectLrf" class="ghost">全选 LRF</button>
+      <button id="deleteSelected" class="danger" disabled>删除已选 <span id="selectedCount">0</span></button>
+      <button id="supportAuthor" class="ghost">支持作者</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="toolbar">
+      <input id="search" type="search" placeholder="搜索文件名" autocomplete="off">
+      <select id="typeFilter">
+        <option value="all">全部类型</option>
+        <option value="video">视频</option>
+        <option value="photo">照片</option>
+        <option value="other">LRF / AAC 等其他</option>
+      </select>
+      <select id="sortFilter">
+        <option value="name">按名称排序</option>
+        <option value="time-desc">从新到旧</option>
+        <option value="time-asc">从旧到新</option>
+        <option value="size-desc">体积从大到小</option>
+      </select>
+      <label><input type="checkbox" id="previewOnly" checked> 只显示可预览素材</label>
+    </section>
+
+    <div id="grid" class="grid" aria-live="polite"></div>
+    <div id="empty" class="empty" hidden>没有匹配的文件</div>
+    <div class="load-more-wrap">
+      <button id="loadMore" class="ghost" hidden>手动加载更多（剩余 <span id="loadMoreCount">0</span> 个）</button>
+    </div>
+  </main>
+
+  <div id="viewer" class="overlay">
+    <div class="dialog viewer-dialog">
+      <div class="dialog-head">
+        <h2 id="viewerName">预览</h2>
+        <button id="viewerPrev" class="ghost">‹ 上一个</button>
+        <button id="viewerNext" class="ghost">下一个 ›</button>
+        <button id="viewerDelete" class="danger">删除当前</button>
+        <button id="viewerClose" class="ghost">关闭</button>
+      </div>
+      <div id="viewerBody" class="viewer-body"></div>
+    </div>
+  </div>
+
+  <div id="confirmDialog" class="overlay">
+    <div class="dialog confirm-dialog">
+      <div class="dialog-head">
+        <h2 id="confirmTitle">确认删除</h2>
+        <button id="confirmCancel" class="ghost">取消</button>
+      </div>
+      <div class="dialog-body">
+        <p class="warning">将直接从设备中删除文件，此操作不可恢复。请确认重要素材已备份。</p>
+        <label class="permanent-option"><input type="checkbox" id="permanentDelete" checked> 直接删除（不可恢复）</label>
+        <ul id="confirmList" class="confirm-list"></ul>
+      </div>
+      <div class="dialog-foot">
+        <button id="confirmDelete" class="danger">确认删除</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="progressDialog" class="overlay">
+    <div class="dialog progress-dialog">
+      <div class="dialog-head"><h2>正在删除</h2></div>
+      <div class="dialog-body">
+        <p id="progressText">准备中…</p>
+        <div class="progress-track"><div id="progressBar"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="/app.js" type="module"></script>
+</body>
+</html>

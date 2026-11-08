@@ -1,0 +1,90 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-14
+            script: dist:mac
+            asset_glob: 'release/*.dmg'
+            asset_glob_zip: 'release/*mac.zip'
+          - os: windows-latest
+            script: dist:win
+            asset_glob: 'release/*.exe'
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: dji-media-manager/package-lock.json
+      - name: Install dependencies
+        working-directory: dji-media-manager
+        run: npm ci
+        env:
+          ELECTRON_MIRROR: https://npmmirror.com/mirrors/electron/
+          ELECTRON_BUILDER_BINARIES_MIRROR: https://npmmirror.com/mirrors/electron-builder-binaries/
+          FFMPEG_BINARIES_URL: https://github.com/eugeneware/ffmpeg-static/releases/download
+      - name: Syntax check
+        working-directory: dji-media-manager
+        shell: bash
+        run: |
+          node --check server.js
+          node --check desktop/main.js
+          node --check desktop/server-entry.cjs
+          node --check public/app.js
+      - name: Build
+        working-directory: dji-media-manager
+        run: npm run ${{ matrix.script }}
+        env:
+          ELECTRON_MIRROR: https://npmmirror.com/mirrors/electron/
+          ELECTRON_BUILDER_BINARIES_MIRROR: https://npmmirror.com/mirrors/electron-builder-binaries/
+      - name: Generate checksums
+        working-directory: dji-media-manager
+        shell: pwsh
+        run: |
+          $files = Get-ChildItem release -File | Where-Object { $_.Extension -in '.dmg','.zip','.exe' }
+          $lines = $files | ForEach-Object { (Get-FileHash $_.FullName -Algorithm SHA256).Hash + '  ' + $_.Name }
+          $lines | Set-Content -Encoding ascii release/SHA256SUMS
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dji-media-manager-${{ runner.os }}
+          if-no-files-found: error
+          path: |
+            dji-media-manager/release/*.dmg
+            dji-media-manager/release/*mac.zip
+            dji-media-manager/release/*.exe
+            dji-media-manager/release/SHA256SUMS
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+          path: dist
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            dist/*.dmg
+            dist/*mac.zip
+            dist/*.exe
+            dist/SHA256SUMS

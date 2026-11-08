@@ -1,0 +1,54 @@
+name: Bug 反馈
+description: 报告无法打开、删除失败或界面异常
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请先确认已下载最新 Release，并核对 SHA256。
+        涉及删除失败的问题不要上传敏感素材截图。
+  - type: input
+    id: version
+    attributes:
+      label: 版本
+      placeholder: 例如 1.0.0
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: 平台
+      options:
+        - macOS Apple Silicon
+        - macOS Intel
+        - Windows x64
+        - 其他
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. 插入存储卡
+        2. 选择目录
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望结果
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际结果
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: 错误信息或截图
+      description: 请先隐藏路径中的个人信息。
