@@ -1,7 +1,7 @@
 {
   "name": "dji-media-manager",
   "productName": "DJI 素材管理器",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
   "description": "浏览并安全删除 DJI 存储卡素材的桌面工具",
