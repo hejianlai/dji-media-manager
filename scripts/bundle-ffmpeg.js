@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
+import zlib from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 
@@ -42,7 +43,14 @@ async function ensureMacBinary(arch) {
   curlArgs.push(url, '-o', gz);
   fs.mkdirSync(destDir, { recursive: true });
   await run('curl', curlArgs);
-  await run('gunzip', ['-kf', gz]);
+  await new Promise((resolve, reject) => {
+    const input = fs.createReadStream(gz);
+    const output = fs.createWriteStream(dest);
+    input.pipe(zlib.createGunzip()).pipe(output);
+    output.on('finish', resolve);
+    output.on('error', reject);
+    input.on('error', reject);
+  });
   fs.rmSync(gz, { force: true });
   fs.chmodSync(dest, 0o755);
   return dest;

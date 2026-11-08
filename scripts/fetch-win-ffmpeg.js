@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
+import zlib from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -28,8 +29,14 @@ try {
   if (process.env.FFMPEG_NO_PROXY === '1') curlArgs.push('--noproxy', '*');
   curlArgs.push(url, '-o', gzipPath);
   await run('curl', curlArgs);
-  await run('gunzip', ['-kf', gzipPath]);
-  // gunzip -k keeps .gz; ffmpeg.exe already extracted without suffix.
+  await new Promise((resolve, reject) => {
+    const input = fs.createReadStream(gzipPath);
+    const output = fs.createWriteStream(target);
+    input.pipe(zlib.createGunzip()).pipe(output);
+    output.on('finish', resolve);
+    output.on('error', reject);
+    input.on('error', reject);
+  });
   fs.rmSync(gzipPath, { force: true });
   fs.chmodSync(target, 0o755);
   fs.copyFileSync(path.join(__dirname, 'bundle-readme.md'), path.join(targetDir, 'README.md'));
