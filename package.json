@@ -21,14 +21,14 @@
     "predist:mac": "npm run bundle:ffmpeg",
     "predist:win": "npm run bundle:ffmpeg-win",
     "predist": "npm run bundle:ffmpeg",
-    "dist:mac": "electron-builder --mac dmg zip",
-    "dist:win": "electron-builder --win nsis portable --x64",
-    "dist": "electron-builder --mac dmg zip --win nsis portable",
-    "dist:mac-arm64": "electron-builder --mac dmg zip --arm64",
-    "dist:mac-x64": "electron-builder --mac dmg zip --x64",
+    "dist:mac": "electron-builder --mac dmg zip --publish never",
+    "dist:win": "electron-builder --win nsis portable --x64 --publish never",
+    "dist": "electron-builder --mac dmg zip --win nsis portable --x64 --publish never",
+    "dist:mac-arm64": "electron-builder --mac dmg zip --arm64 --publish never",
+    "dist:mac-x64": "electron-builder --mac dmg zip --x64 --publish never",
     "bundle:ffmpeg-win": "node scripts/fetch-win-ffmpeg.js",
     "cross:win": "FFMPEG_BINARIES_URL=https://npmmirror.com/mirrors/ffmpeg-static/ FFMPEG_NO_PROXY=1 npm run dist:win",
-    "dist:mac-ci": "electron-builder --mac dmg zip --arm64"
+    "dist:mac-ci": "electron-builder --mac dmg zip --arm64 --publish never"
   },
   "build": {
     "appId": "app.jackhe.dji-media-manager",
