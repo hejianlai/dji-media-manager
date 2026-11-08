@@ -80,7 +80,8 @@
           "from": "resources/branding/",
           "to": "branding/"
         }
-      ]
+      ],
+      "artifactName": "${name}-${version}-${arch}-${os}.${ext}"
     },
     "win": {
       "target": [
@@ -97,7 +98,7 @@
           ]
         }
       ],
-      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "artifactName": "${name}-${version}-${arch}.${ext}",
       "signAndEditExecutable": false,
       "extraResources": [
         {
@@ -124,10 +125,10 @@
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "shortcutName": "DJI 素材管理器",
-      "artifactName": "${productName}-Setup-${version}-${arch}.${ext}"
+      "artifactName": "${name}-Setup-${version}-${arch}.${ext}"
     },
     "portable": {
-      "artifactName": "${productName}-Portable-${version}-${arch}.${ext}"
+      "artifactName": "${name}-Portable-${version}-${arch}.${ext}"
     }
   },
   "devDependencies": {
