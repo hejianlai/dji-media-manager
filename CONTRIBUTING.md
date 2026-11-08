@@ -13,7 +13,6 @@
 要求 Node.js 18+。
 
 ```bash
-cd dji-media-manager
 npm install
 npm run desktop
 ```

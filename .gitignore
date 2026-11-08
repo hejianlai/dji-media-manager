@@ -2,7 +2,7 @@
 node_modules/
 .cache/
 release/
-dji-media-manager/resources/ffmpeg/ffmpeg
-dji-media-manager/resources/ffmpeg/ffmpeg.exe
-dji-media-manager/resources/ffmpeg/ffmpeg-win.LICENSE
-dji-media-manager/resources/ffmpeg/README.md
+resources/ffmpeg/ffmpeg
+resources/ffmpeg/ffmpeg.exe
+resources/ffmpeg/ffmpeg-win.LICENSE
+resources/ffmpeg/README.md

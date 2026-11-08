@@ -30,16 +30,16 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: dji-media-manager/package-lock.json
+          cache-dependency-path: package-lock.json
       - name: Install dependencies
-        working-directory: dji-media-manager
+        working-directory: .
         run: npm ci
         env:
           ELECTRON_MIRROR: https://npmmirror.com/mirrors/electron/
           ELECTRON_BUILDER_BINARIES_MIRROR: https://npmmirror.com/mirrors/electron-builder-binaries/
           FFMPEG_BINARIES_URL: https://github.com/eugeneware/ffmpeg-static/releases/download
       - name: Syntax check
-        working-directory: dji-media-manager
+        working-directory: .
         shell: bash
         run: |
           node --check server.js
@@ -47,13 +47,13 @@ jobs:
           node --check desktop/server-entry.cjs
           node --check public/app.js
       - name: Build
-        working-directory: dji-media-manager
+        working-directory: .
         run: npm run ${{ matrix.script }}
         env:
           ELECTRON_MIRROR: https://npmmirror.com/mirrors/electron/
           ELECTRON_BUILDER_BINARIES_MIRROR: https://npmmirror.com/mirrors/electron-builder-binaries/
       - name: Generate checksums
-        working-directory: dji-media-manager
+        working-directory: .
         shell: pwsh
         run: |
           $files = Get-ChildItem release -File | Where-Object { $_.Extension -in '.dmg','.zip','.exe' }
@@ -65,10 +65,10 @@ jobs:
           name: dji-media-manager-${{ runner.os }}
           if-no-files-found: error
           path: |
-            dji-media-manager/release/*.dmg
-            dji-media-manager/release/*mac.zip
-            dji-media-manager/release/*.exe
-            dji-media-manager/release/SHA256SUMS
+            release/*.dmg
+            release/*mac.zip
+            release/*.exe
+            release/SHA256SUMS
 
   release:
     if: startsWith(github.ref, 'refs/tags/')

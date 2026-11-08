@@ -3,7 +3,6 @@
 ## 本地构建
 
 ```bash
-cd dji-media-manager
 npm ci
 
 export ELECTRON_MIRROR=https://npmmirror.com/mirrors/electron/
