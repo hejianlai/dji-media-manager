@@ -24,8 +24,8 @@
 
 从 GitHub Releases 下载对应架构：
 
-- Apple Silicon：`DJI 素材管理器-<version>-arm64.dmg`
-- Intel：`DJI 素材管理器-<version>-x64.dmg`
+- Apple Silicon：`dji-media-manager-<version>-arm64-mac.dmg`
+- Intel：`dji-media-manager-<version>-x64-mac.dmg`
 
 未签名版本首次打开：
 
@@ -41,8 +41,8 @@ xattr -dr com.apple.quarantine "/Applications/DJI 素材管理器.app"
 
 从 GitHub Releases 下载：
 
-- 安装版：`DJI 素材管理器 Setup <version>.exe`
-- 免安装版：`DJI 素材管理器 <version>.exe`
+- 安装版：`dji-media-manager-Setup-<version>-x64.exe`
+- 免安装版：`dji-media-manager-Portable-<version>-x64.exe`
 
 未签名 EXE 可能出现 SmartScreen 或杀毒软件提示：
 

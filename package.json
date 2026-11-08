@@ -1,10 +1,10 @@
 {
   "name": "dji-media-manager",
-  "productName": "DJI 素材管理器",
+  "productName": "DJI Media Manager",
   "version": "1.0.1",
   "private": true,
   "type": "module",
-  "description": "浏览并安全删除 DJI 存储卡素材的桌面工具",
+  "description": "Browse and safely clean DJI Action 4 media from SD cards",
   "main": "desktop/main.js",
   "engines": {
     "node": ">=18"
@@ -32,7 +32,7 @@
   },
   "build": {
     "appId": "app.jackhe.dji-media-manager",
-    "productName": "DJI 素材管理器",
+    "productName": "DJI Media Manager",
     "directories": {
       "output": "release",
       "buildResources": "build"
@@ -73,7 +73,7 @@
       "entitlements": "build/entitlements.mac.plist",
       "extraResources": [
         {
-          "from": "resources/ffmpeg/ffmpeg",
+          "from": "resources/ffmpeg/${arch}/ffmpeg",
           "to": "ffmpeg/ffmpeg"
         },
         {
@@ -124,7 +124,7 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "DJI 素材管理器",
+      "shortcutName": "DJI Media Manager",
       "artifactName": "${name}-Setup-${version}-${arch}.${ext}"
     },
     "portable": {

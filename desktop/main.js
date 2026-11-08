@@ -82,7 +82,7 @@ async function openWindow(url) {
     minHeight: 700,
     backgroundColor: '#101114',
     autoHideMenuBar: true,
-    title: 'DJI 素材管理器',
+    title: 'DJI Media Manager',
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: false,
@@ -144,12 +144,12 @@ function setApplicationMenu() {
       label: app.name,
       submenu: [
         {
-          label: '关于 DJI 素材管理器',
+          label: 'About DJI Media Manager',
           click: () => {
             dialog.showMessageBox({
               type: 'info',
               title: '关于',
-              message: 'DJI 素材管理器',
+              message: 'DJI Media Manager',
               detail: [
                 `版本：${app.getVersion()}`,
                 '作者：JackHe',
