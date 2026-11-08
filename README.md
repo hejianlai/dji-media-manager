@@ -111,15 +111,12 @@ Get-FileHash "下载文件.exe" -Algorithm SHA256
 
 ### 微信 / 支付宝
 
-> 二维码图片路径发布前请替换为你的实际文件。
-
-<p>
-  <img src="docs/images/wechat-reward-qr.png" alt="微信打赏二维码" width="240">
-  <img src="docs/images/alipay-reward-qr.png" alt="支付宝打赏二维码" width="240">
+<p align="center">
+  <img src="resources/branding/wechat-reward-qr.png" alt="微信打赏二维码" width="260">
+  <img src="resources/branding/alipay-reward-qr.png" alt="支付宝打赏二维码" width="260">
 </p>
 
-- 左图：微信
-- 右图：支付宝
+左图：微信；右图：支付宝。
 
 ### GitHub Sponsors（可选）
 
