@@ -27,7 +27,8 @@
     "dist:mac-arm64": "electron-builder --mac dmg zip --arm64",
     "dist:mac-x64": "electron-builder --mac dmg zip --x64",
     "bundle:ffmpeg-win": "node scripts/fetch-win-ffmpeg.js",
-    "cross:win": "FFMPEG_BINARIES_URL=https://npmmirror.com/mirrors/ffmpeg-static/ FFMPEG_NO_PROXY=1 npm run dist:win"
+    "cross:win": "FFMPEG_BINARIES_URL=https://npmmirror.com/mirrors/ffmpeg-static/ FFMPEG_NO_PROXY=1 npm run dist:win",
+    "dist:mac-ci": "electron-builder --mac dmg zip --arm64"
   },
   "build": {
     "appId": "app.jackhe.dji-media-manager",
