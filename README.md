@@ -4,6 +4,16 @@
 
 ![screenshot placeholder](docs/images/screenshot.png)
 
+## macOS 下载提示
+
+如果你从 GitHub 下载 DMG 后打开提示“已损坏”，这是 macOS 对未签名应用的拦截，不是文件损坏。解决方法：
+
+```bash
+xattr -dr com.apple.quarantine "/Applications/DJI Media Manager.app"
+```
+
+详细说明见下方“macOS”安装章节。
+
 ## 功能
 
 - 自动发现存储卡：
@@ -31,11 +41,20 @@
 
 1. 把 App 拖入 `/Applications`
 2. 右键 App → **打开**
-3. 如果 macOS 仍提示，可在终端执行：
+
+如果 macOS 提示：
+
+> “DJI Media Manager.app”已损坏，无法打开。你应该将它移到废纸篓。
+
+这不是文件真的损坏，是 macOS 对未签名 / 未公证应用的拦截。请在终端执行：
 
 ```bash
 xattr -dr com.apple.quarantine "/Applications/DJI Media Manager.app"
 ```
+
+然后重新打开即可。
+
+如果系统提示输入密码，输入你的 Mac 登录密码即可。执行命令只移除 GitHub 下载标记，不会修改 App 本身。
 
 ### Windows
 
